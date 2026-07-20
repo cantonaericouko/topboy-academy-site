@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cantona Ouko | Kabras RFC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch: #14301F;
+    --pitch-deep: #0D2216;
+    --chalk: #F6F3EA;
+    --ink: #171410;
+    --ochre: #C9752B;
+    --ochre-bright: #E08A3C;
+    --line: rgba(246,243,234,0.18);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--chalk);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+  }
+
+  h1,h2,h3, .display{
+    font-family:'Anton', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    font-weight:400;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.03em;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--pitch);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .brand{
+    color:var(--chalk);
+    font-family:'Anton', sans-serif;
+    font-size:1.1rem;
+    letter-spacing:0.04em;
+  }
+  .brand span{ color:var(--ochre-bright); }
+  .navlinks{ display:flex; gap:28px; }
+  .navlinks a{
+    color:var(--chalk);
+    font-size:0.82rem;
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.05em;
+    opacity:0.75;
+    transition:opacity .2s;
+  }
+  .navlinks a:hover{ opacity:1; }
+  @media(max-width:640px){ .navlinks{ display:none; } }
+
+  /* ===== HERO / TEAM SHEET ===== */
+  header.hero{
+    background:
+      radial-gradient(ellipse at 15% -10%, rgba(224,138,60,0.18), transparent 55%),
+      linear-gradient(180deg, var(--pitch) 0%, var(--pitch-deep) 100%);
+    color:var(--chalk);
+    position:relative;
+    overflow:hidden;
+    border-bottom:3px solid var(--ochre);
+  }
+  header.hero::before{
+    /* pitch line marks */
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 120px);
+    opacity:0.5;
+    pointer-events:none;
+  }
+  .hero-inner{
+    padding:64px 0 48px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ochre-bright);
+    letter-spacing:0.12em;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:2px; background:var(--ochre-bright);
+    display:inline-block;
+  }
+  .hero-name{
+    font-size:clamp(2.6rem, 8vw, 5.4rem);
+    line-height:0.95;
+    color:var(--chalk);
+  }
+  .hero-name .last{ color:var(--ochre-bright); }
+  .hero-sub{
+    margin-top:18px;
+    max-width:520px;
+    font-size:1.05rem;
+    color:rgba(246,243,234,0.82);
+  }
+  .cta-row{
+    margin-top:34px;
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    padding:14px 22px;
+    border-radius:2px;
+    display:inline-block;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{ background:var(--ochre); color:var(--pitch-deep); font-weight:600; }
+  .btn-primary:hover{ background:var(--ochre-bright); transform:translateY(-2px); }
+  .btn-ghost{ border:1px solid var(--line); color:var(--chalk); }
+  .btn-ghost:hover{ border-color:var(--ochre-bright); transform:translateY(-2px); }
+
+  /* scoreboard strip */
+  .scoreboard{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--line);
+  }
+  .scoreboard div{
+    padding:20px 4px 4px;
+    border-right:1px solid var(--line);
+  }
+  .scoreboard div:last-child{ border-right:none; }
+  .scoreboard .num{
+    font-family:'Anton', sans-serif;
+    font-size:clamp(1.5rem,4vw,2.3rem);
+    color:var(--ochre-bright);
+  }
+  .scoreboard .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    color:rgba(246,243,234,0.65);
+    text-transform:uppercase;
+    margin-top:4px;
+  }
+  @media(max-width:640px){
+    .scoreboard{ grid-template-columns:repeat(2,1fr); }
+    .scoreboard div:nth-child(2){ border-right:none; }
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section{ padding:76px 0; }
+  .section-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:36px;
+  }
+  .section-num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--ochre);
+    font-size:0.85rem;
+  }
+  .section-title{
+    font-size:clamp(1.6rem,4vw,2.2rem);
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+  }
+  @media(max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid p{ margin-bottom:16px; color:#3a352c; }
+  .about-grid p:last-child{ margin-bottom:0; }
+  .editnote{
+    background:#fff; border:1px dashed #c9752b66;
+    padding:16px 18px; font-size:0.85rem; color:#7a5c3d;
+    border-radius:4px;
+  }
+
+  /* ===== MENTORSHIP - STARTING XV LIST ===== */
+  .xv{
+    border-top:1px solid #d9d3c3;
+  }
+  .xv-item{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:22px;
+    padding:22px 0;
+    border-bottom:1px solid #d9d3c3;
+    align-items:start;
+  }
+  .xv-jersey{
+    font-family:'Anton', sans-serif;
+    font-size:2rem;
+    color:var(--pitch);
+    opacity:0.85;
+  }
+  .xv-item h3{
+    font-size:1.05rem;
+    letter-spacing:0.01em;
+    margin-bottom:6px;
+    color:var(--pitch-deep);
+  }
+  .xv-item p{ color:#3a352c; font-size:0.95rem; max-width:560px; }
+
+  /* ===== PARTNER / SPONSOR CTA ===== */
+  .partner{
+    background:var(--pitch);
+    color:var(--chalk);
+    border-radius:6px;
+    padding:52px 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .partner::after{
+    content:"";
+    position:absolute; right:-60px; top:-60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(224,138,60,0.35), transparent 70%);
+  }
+  .partner h2{ font-size:clamp(1.5rem,4vw,2.1rem); max-width:520px; }
+  .partner p{ margin-top:14px; max-width:480px; color:rgba(246,243,234,0.8); }
+  .partner .cta-row{ margin-top:28px; }
+
+  /* ===== FOOTER ===== */
+  footer{
+    padding:40px 0 60px;
+    border-top:1px solid #d9d3c3;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+  footer .mono{ font-size:0.78rem; color:#6b6252; }
+  .social-links{ display:flex; gap:18px; }
+  .social-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--pitch);
+    border-bottom:1px solid transparent;
+  }
+  .social-links a:hover{ border-color:var(--ochre); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .btn{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">CANTONA <span>OUKO</span></div>
+    <div class="navlinks">
+      <a href="#about">ABOUT</a>
+      <a href="#mentor">MENTORSHIP</a>
+      <a href="#partner">PARTNER</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">KABRAS RFC &middot; KENYA</div>
+    <h1 class="hero-name">CANTONA<br><span class="last">OUKO</span></h1>
+    <p class="hero-sub">
+      Semi-professional rugby player for Kabras RFC. Kenya Cup top point scorer,
+      2025/2026 season. Building a platform on and off the pitch — sharing the
+      mindset, discipline, and training habits behind competing at the top level
+      of Kenyan rugby.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#mentor">Book Mentorship</a>
+      <a class="btn btn-ghost" href="#partner">Partner With Me</a>
+    </div>
+
+    <div class="scoreboard mono">
+      <div>
+        <div class="num">2,636</div>
+        <div class="label">Instagram Followers</div>
+      </div>
+      <div>
+        <div class="num">3x</div>
+        <div class="label">Kenya Cup Champion</div>
+      </div>
+      <div>
+        <div class="num">3x</div>
+        <div class="label">Enterprise Cup Champion</div>
+      </div>
+      <div>
+        <div class="num">Kabras</div>
+        <div class="label">Current Club</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="section-head">
+        <span class="section-num mono">01</span>
+        <h2 class="section-title">About</h2>
+      </div>
+      <p>
+        A 3-time Kenya Cup champion and 3-time Enterprise Cup champion with Kabras RFC,
+        and top point scorer in the Kenya Cup for the 2025/2026 season. Competing at
+        the top level of Kenyan club rugby while balancing the discipline it takes
+        to stay there season after season.
+      </p>
+      <p>
+        Off the pitch, a biochemist working as a process manager at a sugar company —
+        bringing the same structure and consistency from the lab and the plant floor
+        into training, mentorship, and building a platform that shares that journey.
+      </p>
+    </div>
+    <div class="editnote">
+      <strong>Edit tip:</strong> replace the bracketed placeholder text throughout this
+      page with your real stats, bio, and offer details before sharing this link.
+      Everything editable is marked like this.
+    </div>
+  </div>
+</section>
+
+<section id="mentor" style="background:#EFEADD;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">02</span>
+      <h2 class="section-title">Mentorship</h2>
+    </div>
+    <div class="xv">
+      <div class="xv-item">
+        <div class="xv-jersey mono">01</div>
+        <div>
+          <h3>1:1 Athlete Mentorship</h3>
+          <p>[Describe your offer — e.g. monthly sessions for young players on training discipline, mindset, and balancing sport with work/school.]</p>
+        </div>
+      </div>
+      <div class="xv-item">
+        <div class="xv-jersey mono">02</div>
+        <div>
+          <h3>Training & Fitness Guidance</h3>
+          <p>[Describe what you offer — sample programs, technique breakdowns, conditioning advice for aspiring semi-pro players.]</p>
+        </div>
+      </div>
+      <div class="xv-item">
+        <div class="xv-jersey mono">03</div>
+        <div>
+          <h3>Group Sessions / Clinics</h3>
+          <p>[Describe availability for club visits, school clinics, or small-group coaching sessions.]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="partner">
+  <div class="wrap">
+    <div class="partner">
+      <div class="section-num mono" style="color:var(--ochre-bright);">03 — SPONSORSHIP</div>
+      <h2>Partner with an athlete your audience already trusts.</h2>
+      <p>
+        [One or two lines on your audience — who follows you, what kind of content performs
+        best, and the type of brands you're looking to work with: sportswear, nutrition,
+        local business, etc.]
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Request Media Kit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;">
+    <div class="mono">© 2026 CANTONA OUKO — KABRAS RFC</div>
+    <div class="social-links">
+      <a href="https://instagram.com/cantona_ouko" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="https://tiktok.com/@cantona_ouko" target="_blank" rel="noopener">TIKTOK</a>
+      <a href="https://twitter.com/cantona_ouko" target="_blank" rel="noopener">TWITTER</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
