@@ -269,7 +269,147 @@
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     .btn{ transition:none; }
+  }  /* ===== GALLERY ===== */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
   }
+  @media(max-width:700px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
+  .gallery-item{
+    aspect-ratio:4/5;
+    background:linear-gradient(160deg, #d9d3c3, #c7bfa8);
+    border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    overflow:hidden;
+    color:#6b6252;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    text-align:center;
+    padding:12px;
+  }
+  .gallery-item img{
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline{
+    border-left:2px solid var(--ochre);
+    margin-left:8px;
+  }
+  .timeline-item{
+    position:relative;
+    padding:0 0 40px 32px;
+  }
+  .timeline-item:last-child{ padding-bottom:0; }
+  .timeline-item::before{
+    content:"";
+    position:absolute; left:-7px; top:2px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--ochre);
+    border:2px solid var(--chalk);
+  }
+  .timeline-year{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ochre);
+    margin-bottom:6px;
+    display:block;
+  }
+  .timeline-item h3{ font-size:1.05rem; color:var(--pitch-deep); margin-bottom:6px; }
+  .timeline-item p{ color:#3a352c; font-size:0.95rem; max-width:560px; }
+
+  /* ===== INSTAGRAM EMBEDS ===== */
+  .insta-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:24px;
+  }
+  @media(max-width:700px){ .insta-grid{ grid-template-columns:1fr; } }
+  .insta-embed-wrap{
+    background:#fff;
+    border:1px solid #d9d3c3;
+    border-radius:6px;
+    overflow:hidden;
+    min-height:200px;
+  }
+
+  /* ===== QUOTES / MOTIVATION ===== */
+  .quotes-strip{
+    background:var(--pitch-deep);
+    color:var(--chalk);
+    border-radius:6px;
+    padding:44px 40px;
+  }
+  .quote-block{
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .quote-block:last-child{ border-bottom:none; padding-bottom:0; }
+  .quote-block p.quote-text{
+    font-size:1.1rem;
+    font-style:italic;
+    color:var(--chalk);
+    max-width:620px;
+  }
+  .quote-block .quote-src{
+    margin-top:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--ochre-bright);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+
+  /* ===== CONTACT FORM ===== */
+  .contact-form{
+    display:grid;
+    gap:16px;
+    max-width:520px;
+  }
+  .contact-form label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:#6b6252;
+    margin-bottom:6px;
+    display:block;
+  }
+  .contact-form input, .contact-form textarea{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #d9d3c3;
+    border-radius:4px;
+    background:#fff;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    color:var(--ink);
+  }
+  .contact-form input:focus, .contact-form textarea:focus{
+    outline:none;
+    border-color:var(--ochre);
+  }
+  .contact-form textarea{ min-height:120px; resize:vertical; }
+  .contact-form button{
+    justify-self:start;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    padding:14px 26px;
+    border-radius:2px;
+    background:var(--ochre);
+    color:var(--pitch-deep);
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .contact-form button:hover{ background:var(--ochre-bright); transform:translateY(-2px); }
+
 </style>
 </head>
 <body>
@@ -279,9 +419,10 @@
     <div class="brand">CANTONA <span>OUKO</span></div>
     <div class="navlinks">
       <a href="#about">ABOUT</a>
+      <a href="#gallery">GALLERY</a>
       <a href="#mentor">MENTORSHIP</a>
       <a href="#partner">PARTNER</a>
-      <a href="#contact">CONTACT</a>
+      <a href="#contact-form">CONTACT</a>
     </div>
   </div>
 </nav>
@@ -341,10 +482,66 @@
         into training, mentorship, and building a platform that shares that journey.
       </p>
     </div>
-    <div class="editnote">
-      <strong>Edit tip:</strong> replace the bracketed placeholder text throughout this
-      page with your real stats, bio, and offer details before sharing this link.
-      Everything editable is marked like this.
+  </div>
+</section>
+
+<section id="gallery" style="background:#EFEADD;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">02</span>
+      <h2 class="section-title">Matchday Gallery</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="photo-1.jpg" alt="Cantona Ouko kicking for Kabras RFC" onerror="this.style.display='none'"></div>
+      <div class="gallery-item"><img src="photo-2.jpg" alt="Cantona Ouko playing for Kabras RFC" onerror="this.style.display='none'"></div>
+      <div class="gallery-item"><img src="photo-3.jpg" alt="Cantona Ouko preparing to kick" onerror="this.style.display='none'"></div>
+      <div class="gallery-item"><img src="photo-4.jpg" alt="Cantona Ouko Kenya Cup top point scorer award" onerror="this.style.display='none'"></div>
+    </div>
+    <div class="editnote" style="margin-top:20px;">
+      <strong>Want to add more?</strong> upload additional photo-5.jpg, photo-6.jpg, etc.
+      to the same GitHub repo folder as index.html, then copy a gallery-item block above
+      to display them.
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">03</span>
+      <h2 class="section-title">The Journey So Far</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-year mono">2018</span>
+        <h3>Fresh Out of High School</h3>
+        <p>Started rugby straight out of high school with no shortcuts and no head start — just a decision to begin. Every player you'll ever admire started exactly here.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">2018 – 2022</span>
+        <h3>Built From Scratch at Masinde Muliro University</h3>
+        <p>Joined Masinde Muliro University of Science and Technology to study Biochemistry, and joined the university rugby team from the bottom of the depth chart. Worked up through the ranks year by year — no fast-tracking, just consistent effort — until finally earning a place in the main team in the 3rd and 4th years.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">Post-Graduation</span>
+        <h3>Arriving at Kabras — A New, Harder Grind</h3>
+        <p>Graduated and moved on to Kabras RFC, stepping into a dressing room full of seasoned players, several with national team caps. Instead of being intimidated by the level, treated it as the next chapter to grind through — because every level up demands starting the work over again.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">Season 1</span>
+        <h3>Paying Dues in the Second Team</h3>
+        <p>Spent the first season with Kabras in the second team, earning only cameo appearances in the first team. Stayed patient and kept working — proof that a slow start doesn't define the ceiling.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">Seasons 2 & 3</span>
+        <h3>Earned the Starting Jersey</h3>
+        <p>Sealed a starting position by the second season and held it into the third — turning consistent, unglamorous work into a permanent place in the first team.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">2025/2026</span>
+        <h3>League Top Point Scorer — 133 Points</h3>
+        <p>Started all 13 of 14 games played and finished the season as the league's top point scorer with 133 points. From second-team cameos to the top of the scoring charts — the throughline the whole way was showing up and doing the work when no one was watching.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -352,9 +549,34 @@
 <section id="mentor" style="background:#EFEADD;">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-num mono">02</span>
+      <span class="section-num mono">04</span>
       <h2 class="section-title">Mentorship</h2>
     </div>
+
+    <div class="quotes-strip" style="margin-bottom:44px;">
+      <div class="quote-block">
+        <p class="quote-text">"The only way to prove that you are a good sport is to lose."</p>
+        <div class="quote-src">Ernie Banks</div>
+      </div>
+      <div class="quote-block">
+        <p class="quote-text">"Discipline is the bridge between goals and accomplishment."</p>
+        <div class="quote-src">Jim Rohn</div>
+      </div>
+      <div class="quote-block">
+        <p class="quote-text">"Now faith is the substance of things hoped for, the evidence of things not seen."</p>
+        <div class="quote-src">Hebrews 11:1 (KJV)</div>
+      </div>
+    </div>
+
+    <div class="insta-grid" style="margin-bottom:44px;">
+      <div class="insta-embed-wrap">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWRemqwCE3_/" data-instgrm-version="14" style="width:100%; margin:0;"></blockquote>
+      </div>
+      <div class="insta-embed-wrap">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DYerMx4CGOT/" data-instgrm-version="14" style="width:100%; margin:0;"></blockquote>
+      </div>
+    </div>
+
     <div class="xv">
       <div class="xv-item">
         <div class="xv-jersey mono">01</div>
@@ -383,9 +605,11 @@
     </div>
   </div>
 </section>
+
+<section id="partner">
   <div class="wrap">
     <div class="partner">
-      <div class="section-num mono" style="color:var(--ochre-bright);">03 — SPONSORSHIP</div>
+      <div class="section-num mono" style="color:var(--ochre-bright);">05 — SPONSORSHIP</div>
       <h2>Partner with an athlete your audience already trusts.</h2>
       <p>
         A growing, engaged Instagram following that trusts an athlete who backs up
@@ -401,6 +625,30 @@
   </div>
 </section>
 
+<section id="contact-form">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">06</span>
+      <h2 class="section-title">Get In Touch</h2>
+    </div>
+    <form class="contact-form" action="https://formspree.io/f/mqerlwdn" method="POST">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
 <footer id="contact">
   <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;">
     <div class="mono">© 2026 CANTONA OUKO — KABRAS RFC</div>
@@ -413,5 +661,6 @@
   </div>
 </footer>
 
+<script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
