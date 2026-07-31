@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Foundation | Rugby Mentorship for Students & Student-Athletes — Cantona Ouko</title>
+<meta name="description" content="Rugby mentorship by Kabras RFC's Cantona Ouko for high school players, teachers and coaches, and campus student-athletes — technique, discipline, and preparing for life beyond school and sport.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch: #14301F;
+    --pitch-deep: #0D2216;
+    --chalk: #F6F3EA;
+    --ink: #171410;
+    --ochre: #C9752B;
+    --ochre-bright: #E08A3C;
+    --line: rgba(246,243,234,0.18);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--chalk);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+  }
+
+  h1,h2,h3, .display{
+    font-family:'Anton', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    font-weight:400;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.03em;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--pitch);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .brand{
+    color:var(--chalk);
+    font-family:'Anton', sans-serif;
+    font-size:1.1rem;
+    letter-spacing:0.04em;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .brand svg{ width:32px; height:32px; flex-shrink:0; }
+  .brand span{ color:var(--ochre-bright); }
+  .navlinks{ display:flex; gap:28px; }
+  .navlinks a{
+    color:var(--chalk);
+    font-size:0.82rem;
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.05em;
+    opacity:0.75;
+    transition:opacity .2s;
+  }
+  .navlinks a:hover{ opacity:1; }
+  .nav-toggle{
+    display:none;
+    background:none; border:none; cursor:pointer;
+    flex-direction:column; gap:5px; padding:6px;
+  }
+  .nav-toggle span{
+    width:22px; height:2px; background:var(--chalk); display:block;
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  @media(max-width:640px){
+    .navlinks{
+      display:none;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--pitch); flex-direction:column; gap:0;
+      border-bottom:1px solid var(--line);
+    }
+    .navlinks.open{ display:flex; }
+    .navlinks a{
+      padding:16px 28px; border-top:1px solid var(--line);
+      opacity:1;
+    }
+    .nav-toggle{ display:flex; }
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal{
+    opacity:0; transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top{
+    position:fixed; bottom:24px; right:24px; z-index:60;
+    width:46px; height:46px;
+    background:var(--ochre);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease, transform .2s ease;
+    border:none; cursor:pointer;
+  }
+  .back-to-top.show{ opacity:1; pointer-events:auto; }
+  .back-to-top:hover{ transform:translateY(-3px); background:var(--ochre-bright); }
+  .back-to-top svg{ width:18px; height:18px; }
+
+  /* ===== SCROLL PROGRESS BAR ===== */
+  .scroll-progress{
+    position:fixed; top:0; left:0; height:3px;
+    background:var(--ochre-bright);
+    z-index:100;
+    width:0%;
+    transition:width .1s linear;
+  }
+
+  /* ===== HERO / TEAM SHEET ===== */
+  header.hero{
+    background: var(--pitch-deep);
+    color:var(--chalk);
+    position:relative;
+    overflow:hidden;
+    border-bottom:3px solid var(--ochre);
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background-image:url('photo-1.jpg');
+    background-size:cover;
+    background-position:center 20%;
+    animation: heroZoom 22s ease-in-out infinite alternate;
+    filter:grayscale(15%);
+  }
+  @keyframes heroZoom{
+    0%{ transform:scale(1); }
+    100%{ transform:scale(1.08); }
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(13,34,22,0.88) 0%, rgba(13,34,22,0.80) 45%, rgba(13,34,22,0.96) 100%),
+      radial-gradient(ellipse at 15% -10%, rgba(224,138,60,0.15), transparent 55%);
+    z-index:1;
+  }
+  header.hero::before{
+    /* pitch line marks */
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 120px);
+    opacity:0.5;
+    pointer-events:none;
+    z-index:2;
+  }
+  .hero-inner{
+    padding:64px 0 48px;
+    position:relative;
+    z-index:3;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ochre-bright);
+    letter-spacing:0.12em;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:2px; background:var(--ochre-bright);
+    display:inline-block;
+  }
+  .hero-name{
+    font-size:clamp(2.6rem, 8vw, 5.4rem);
+    line-height:0.95;
+    color:var(--chalk);
+  }
+  .hero-name .last{ color:var(--ochre-bright); }
+  .hero-sub{
+    margin-top:18px;
+    max-width:520px;
+    font-size:1.05rem;
+    color:rgba(246,243,234,0.82);
+  }
+  .cta-row{
+    margin-top:34px;
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    padding:14px 22px;
+    border-radius:2px;
+    display:inline-block;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{ background:var(--ochre); color:var(--pitch-deep); font-weight:600; }
+  .btn-primary:hover{ background:var(--ochre-bright); transform:translateY(-2px); }
+  .btn-ghost{ border:1px solid var(--line); color:var(--chalk); }
+  .btn-ghost:hover{ border-color:var(--ochre-bright); transform:translateY(-2px); }
+
+  /* scoreboard strip */
+  .scoreboard{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--line);
+  }
+  .scoreboard div{
+    padding:20px 4px 4px;
+    border-right:1px solid var(--line);
+  }
+  .scoreboard div:last-child{ border-right:none; }
+  .scoreboard .num{
+    font-family:'Anton', sans-serif;
+    font-size:clamp(1.5rem,4vw,2.3rem);
+    color:var(--ochre-bright);
+  }
+  .scoreboard .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    color:rgba(246,243,234,0.65);
+    text-transform:uppercase;
+    margin-top:4px;
+  }
+  @media(max-width:640px){
+    .scoreboard{ grid-template-columns:repeat(2,1fr); }
+    .scoreboard div:nth-child(2){ border-right:none; }
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section{ padding:76px 0; }
+  .section-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:36px;
+  }
+  .section-num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--ochre);
+    font-size:0.85rem;
+  }
+  .section-title{
+    font-size:clamp(1.6rem,4vw,2.2rem);
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+  }
+  @media(max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid p{ margin-bottom:16px; color:#3a352c; }
+  .about-grid p:last-child{ margin-bottom:0; }
+  .about-photo{
+    width:100%;
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid #d9d3c3;
+    aspect-ratio:4/5;
+  }
+  .about-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .editnote{
+    background:#fff; border:1px dashed #c9752b66;
+    padding:16px 18px; font-size:0.85rem; color:#7a5c3d;
+    border-radius:4px;
+  }
+
+  /* ===== MENTORSHIP - STARTING XV LIST ===== */
+  .xv{
+    border-top:1px solid #d9d3c3;
+  }
+  .xv-item{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:22px;
+    padding:22px 0;
+    border-bottom:1px solid #d9d3c3;
+    align-items:start;
+  }
+  .xv-jersey{
+    font-family:'Anton', sans-serif;
+    font-size:2rem;
+    color:var(--pitch);
+    opacity:0.85;
+  }
+  .xv-item h3{
+    font-size:1.05rem;
+    letter-spacing:0.01em;
+    margin-bottom:6px;
+    color:var(--pitch-deep);
+  }
+  .xv-item p{ color:#3a352c; font-size:0.95rem; max-width:560px; }
+
+  /* ===== PARTNER / SPONSOR CTA ===== */
+  .partner{
+    background:var(--pitch);
+    color:var(--chalk);
+    border-radius:6px;
+    padding:52px 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .partner-bg{
+    position:absolute; inset:0;
+    background-image:url('photo-4.jpg');
+    background-size:cover;
+    background-position:center 15%;
+    opacity:0.22;
+  }
+  .partner::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(100deg, rgba(20,48,31,0.97) 0%, rgba(20,48,31,0.75) 55%, rgba(20,48,31,0.4) 100%);
+  }
+  .partner::after{
+    content:"";
+    position:absolute; right:-60px; top:-60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(224,138,60,0.35), transparent 70%);
+    z-index:1;
+  }
+  .partner h2{ font-size:clamp(1.5rem,4vw,2.1rem); max-width:520px; position:relative; z-index:2; }
+  .partner p{ margin-top:14px; max-width:480px; color:rgba(246,243,234,0.8); position:relative; z-index:2; }
+  .partner .cta-row{ margin-top:28px; position:relative; z-index:2; }
+  .partner .section-num{ position:relative; z-index:2; }
+
+  /* ===== FOOTER ===== */
+  footer{
+    padding:40px 0 60px;
+    border-top:1px solid #d9d3c3;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+  footer .mono{ font-size:0.78rem; color:#6b6252; }
+  .social-links{ display:flex; gap:18px; }
+  .social-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--pitch);
+    border-bottom:1px solid transparent;
+  }
+  .social-links a:hover{ border-color:var(--ochre); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .btn{ transition:none; }
+  }  /* ===== GALLERY ===== */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+  }
+  @media(max-width:700px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
+  .gallery-item{
+    aspect-ratio:4/5;
+    background:linear-gradient(160deg, #d9d3c3, #c7bfa8);
+    border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    overflow:hidden;
+    color:#6b6252;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    text-align:center;
+    padding:12px;
+  }
+  .gallery-item img{
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .4s ease;
+  }
+  .gallery-item:hover img{ transform:scale(1.08); }
+
+  /* ===== TIMELINE ===== */
+  .timeline{
+    border-left:2px solid var(--ochre);
+    margin-left:8px;
+  }
+  .timeline-item{
+    position:relative;
+    padding:0 0 40px 32px;
+  }
+  .timeline-item:last-child{ padding-bottom:0; }
+  .timeline-item::before{
+    content:"";
+    position:absolute; left:-7px; top:2px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--ochre);
+    border:2px solid var(--chalk);
+  }
+  .timeline-year{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ochre);
+    margin-bottom:6px;
+    display:block;
+  }
+  .timeline-item h3{ font-size:1.05rem; color:var(--pitch-deep); margin-bottom:6px; }
+  .timeline-item p{ color:#3a352c; font-size:0.95rem; max-width:560px; }
+
+  /* ===== INSTAGRAM EMBEDS ===== */
+  .insta-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:24px;
+  }
+  @media(max-width:700px){ .insta-grid{ grid-template-columns:1fr; } }
+  .insta-embed-wrap{
+    background:#fff;
+    border:1px solid #d9d3c3;
+    border-radius:6px;
+    overflow:hidden;
+    min-height:200px;
+  }
+
+  /* ===== QUOTES / MOTIVATION ===== */
+  .quotes-strip{
+    background:var(--pitch-deep);
+    color:var(--chalk);
+    border-radius:6px;
+    padding:44px 40px;
+  }
+  .quote-block{
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .quote-block:last-child{ border-bottom:none; padding-bottom:0; }
+  .quote-block p.quote-text{
+    font-size:1.1rem;
+    font-style:italic;
+    color:var(--chalk);
+    max-width:620px;
+  }
+  .quote-block .quote-src{
+    margin-top:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--ochre-bright);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+
+  /* ===== CONTACT FORM ===== */
+  .contact-form{
+    display:grid;
+    gap:16px;
+    max-width:520px;
+  }
+  .contact-form label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:#6b6252;
+    margin-bottom:6px;
+    display:block;
+  }
+  .contact-form input, .contact-form textarea, .contact-form select{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #d9d3c3;
+    border-radius:4px;
+    background:#fff;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    color:var(--ink);
+  }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus{
+    outline:none;
+    border-color:var(--ochre);
+  }
+  .contact-form textarea{ min-height:120px; resize:vertical; }
+  .contact-form button{
+    justify-self:start;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    padding:14px 26px;
+    border-radius:2px;
+    background:var(--ochre);
+    color:var(--pitch-deep);
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .contact-form button:hover{ background:var(--ochre-bright); transform:translateY(-2px); }
+  /* ===== MISSION / VISION ===== */
+  .mv-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media(max-width:700px){ .mv-grid{ grid-template-columns:1fr; } }
+  .mv-card{
+    background:#fff;
+    border:1px solid #d9d3c3;
+    border-top:3px solid var(--ochre);
+    border-radius:4px;
+    padding:26px 28px;
+  }
+  .mv-card h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    color:var(--ochre);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .mv-card p{ color:#3a352c; font-size:0.98rem; }
+
+  /* ===== PILLARS ===== */
+  .pillars-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+  }
+  @media(max-width:760px){ .pillars-grid{ grid-template-columns:repeat(2,1fr); } }
+  .pillar{
+    background:#fff;
+    border:1px solid #d9d3c3;
+    border-radius:4px;
+    padding:20px 18px;
+    text-align:left;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .pillar:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(13,34,22,0.1);
+    border-color:var(--ochre);
+  }
+  .pillar .pillar-num{
+    font-family:'Anton', sans-serif;
+    font-size:1.6rem;
+    color:var(--pitch);
+    opacity:0.8;
+    display:block;
+    margin-bottom:6px;
+  }
+  .pillar h4{
+    font-size:0.92rem;
+    color:var(--pitch-deep);
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+  }
+  .pillar p{ font-size:0.85rem; color:#5c5646; line-height:1.45; }
+  /* ===== FOUNDATION INTRO BANNER ===== */
+  .foundation-banner{
+    position:relative;
+    margin:0 0 44px;
+    border-radius:6px;
+    overflow:hidden;
+    min-height:280px;
+    display:flex;
+    align-items:flex-end;
+    border:1px solid #d9d3c3;
+  }
+  .foundation-banner-bg{
+    position:absolute; inset:0;
+    background-image:url('photo-2.jpg');
+    background-size:cover;
+    background-position:center 25%;
+    transition:transform .6s ease;
+  }
+  .foundation-banner:hover .foundation-banner-bg{ transform:scale(1.05); }
+  .foundation-banner::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(13,34,22,0.92) 0%, rgba(13,34,22,0.35) 60%, rgba(13,34,22,0.1) 100%);
+  }
+  .foundation-banner-text{
+    position:relative; z-index:2;
+    padding:28px 30px;
+    color:var(--chalk);
+  }
+  .foundation-banner-text p{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+    color:var(--ochre-bright);
+    text-transform:uppercase;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav>
+  <div class="wrap" style="position:relative;">
+    <div class="brand">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="92" fill="#0D2216"/>
+        <circle cx="100" cy="100" r="92" fill="none" stroke="#C9752B" stroke-width="3"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#F6F3EA" stroke-width="0.75" opacity="0.35"/>
+        <text x="100" y="40" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" letter-spacing="3" fill="#E08A3C">KENYA</text>
+        <text x="100" y="128" text-anchor="middle" font-family="'Anton',sans-serif" font-size="64" fill="#F6F3EA">CO</text>
+        <g transform="translate(100,150)">
+          <ellipse cx="0" cy="0" rx="20" ry="11" fill="none" stroke="#C9752B" stroke-width="2"/>
+          <line x1="-9" y1="0" x2="9" y2="0" stroke="#C9752B" stroke-width="1.5"/>
+          <line x1="-4" y1="-3.5" x2="-4" y2="3.5" stroke="#C9752B" stroke-width="1.2"/>
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="#C9752B" stroke-width="1.2"/>
+          <line x1="4" y1="-3.5" x2="4" y2="3.5" stroke="#C9752B" stroke-width="1.2"/>
+        </g>
+        <text x="100" y="176" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" letter-spacing="2" fill="#E08A3C">THE FOUNDATION</text>
+      </svg>
+      CANTONA <span>OUKO</span>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navlinks" id="navLinks">
+      <a href="#mentor">THE FOUNDATION</a>
+      <a href="#about">ABOUT</a>
+      <a href="#gallery">GALLERY</a>
+      <a href="#partner">PARTNER</a>
+      <a href="#contact-form">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-inner">
+    <div style="margin-bottom:28px;">
+      <svg width="220" height="82" viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="40" font-family="'Work Sans', sans-serif" font-size="36" letter-spacing="4.5" fill="#F6F3EA" font-weight="700">THE</text>
+        <text x="0" y="100" font-family="'Work Sans', sans-serif" font-size="36" letter-spacing="4.5" fill="#F6F3EA" font-weight="700">FOUNDATION</text>
+      </svg>
+    </div>
+    <div class="eyebrow">SEMI-PRO RUGBY &middot; KENYA</div>
+    <h1 class="hero-name">CANTONA<br><span class="last">OUKO</span></h1>
+    <p class="hero-sub">
+      Semi-professional rugby player. Kenya Cup top point scorer,
+      2025/2026 season. Running The Foundation — mentorship for high school
+      rugby players, teachers and coaches, and campus student-athletes navigating
+      sport alongside school.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#mentor">Explore The Foundation</a>
+      <a class="btn btn-ghost" href="#partner">Partner With Me</a>
+    </div>
+
+    <div class="scoreboard mono">
+      <div>
+        <div class="num">2,636</div>
+        <div class="label">Instagram Followers</div>
+      </div>
+      <div>
+        <div class="num">3x</div>
+        <div class="label">Kenya Cup Champion</div>
+      </div>
+      <div>
+        <div class="num">3x</div>
+        <div class="label">Enterprise Cup Champion</div>
+      </div>
+      <div>
+        <div class="num">Semi-Pro</div>
+        <div class="label">Rugby Player</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="mentor" style="background:#EFEADD; border-top:3px solid var(--ochre); border-bottom:3px solid var(--ochre);">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--ochre);">
+      <span style="width:26px;height:2px;background:var(--ochre);display:inline-block;"></span>
+      CORE FOCUS
+    </div>
+    <div class="section-head" style="margin-bottom:14px;">
+      <span class="section-num mono">01</span>
+      <svg width="240" height="90" viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="40" font-family="'Work Sans', sans-serif" font-size="36" letter-spacing="4.5" fill="#0D2216" font-weight="700">THE</text>
+        <text x="0" y="100" font-family="'Work Sans', sans-serif" font-size="36" letter-spacing="4.5" fill="#0D2216" font-weight="700">FOUNDATION</text>
+      </svg>
+    </div>
+    <p style="max-width:640px; color:#3a352c; font-size:1.05rem; margin-bottom:40px;">
+      From second-team cameos to league top point scorer — the difference was never talent
+      alone, it was showing up consistently when no one was watching. <strong>The Foundation</strong>
+      is where I pass that on: to high school rugby players and their teachers and coaches,
+      to campus student-athletes balancing sport with a degree, and to anyone trying to
+      prepare for what comes after school and sport.
+    </p>
+
+    <div class="foundation-banner reveal">
+      <div class="foundation-banner-bg"></div>
+      <div class="foundation-banner-text">
+        <p>Kabras RFC &middot; Matchday</p>
+      </div>
+    </div>
+
+    <div class="mv-grid reveal" style="margin-bottom:32px;">
+      <div class="mv-card">
+        <h4>Mission</h4>
+        <p>To equip high school rugby players and campus student-athletes with the skills, discipline, and mindset to compete at a high level, while actively preparing them — with support from teachers and coaches — for a career and life beyond school and sport.</p>
+      </div>
+      <div class="mv-card">
+        <h4>Vision</h4>
+        <p>A generation of Kenyan students and student-athletes who leave school and university as prepared for their future — careers, studies, and life — as they are for their next match.</p>
+      </div>
+    </div>
+
+    <div class="pillars-grid reveal" style="margin-bottom:44px;">
+      <div class="pillar">
+        <span class="pillar-num mono">01</span>
+        <h4>Discipline</h4>
+        <p>The daily habits and consistency behind every title and every season started in the second team.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num mono">02</span>
+        <h4>Preparation</h4>
+        <p>Building for what's next — on the pitch and in a career, degree, or trade — not just the next match.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num mono">03</span>
+        <h4>Faith</h4>
+        <p>Belief in things worked toward but not yet seen — the mindset that carries a player through a grind season.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num mono">04</span>
+        <h4>Community</h4>
+        <p>No one climbs the ranks alone — mentorship, clinics, and ongoing support built around real accountability.</p>
+      </div>
+    </div>
+
+    <div class="quotes-strip reveal" style="margin-bottom:44px;">
+      <div class="quote-block">
+        <p class="quote-text">"The only way to prove that you are a good sport is to lose."</p>
+        <div class="quote-src">Ernie Banks</div>
+      </div>
+      <div class="quote-block">
+        <p class="quote-text">"Discipline is the bridge between goals and accomplishment."</p>
+        <div class="quote-src">Jim Rohn</div>
+      </div>
+      <div class="quote-block">
+        <p class="quote-text">"Now faith is the substance of things hoped for, the evidence of things not seen."</p>
+        <div class="quote-src">Hebrews 11:1 (KJV)</div>
+      </div>
+    </div>
+
+    <div class="insta-grid" style="margin-bottom:44px;">
+      <div class="insta-embed-wrap">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWRemqwCE3_/" data-instgrm-version="14" style="width:100%; margin:0;"></blockquote>
+      </div>
+      <div class="insta-embed-wrap">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DYerMx4CGOT/" data-instgrm-version="14" style="width:100%; margin:0;"></blockquote>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Anton',sans-serif; font-size:1.3rem; text-transform:uppercase; color:var(--pitch-deep); margin-bottom:18px;">What's Included</h3>
+    <div class="xv">
+      <div class="xv-item">
+        <div class="xv-jersey mono">01</div>
+        <div>
+          <h3>1:1 Student-Athlete Mentorship</h3>
+          <p>Monthly one-on-one sessions for high school and campus rugby players, covering skills and technique, mindset and discipline, and how to balance competing at a high level with school or a degree — drawing on my own path as both a Kabras RFC player and a working biochemist.</p>
+        </div>
+      </div>
+      <div class="xv-item">
+        <div class="xv-jersey mono">02</div>
+        <div>
+          <h3>Training & Fitness Guidance</h3>
+          <p>Conditioning and fitness programs built around what it actually takes to compete and stay consistent through a full school or club season, tailored for high school and campus-level players.</p>
+        </div>
+      </div>
+      <div class="xv-item">
+        <div class="xv-jersey mono">03</div>
+        <div>
+          <h3>School & Campus Clinics</h3>
+          <p>Available for high school rugby programs, teachers and coaches organizing team sessions, and university clubs — covering technique, discipline, and balancing sport with academics.</p>
+        </div>
+      </div>
+      <div class="xv-item">
+        <div class="xv-jersey mono">04</div>
+        <div>
+          <h3>Ongoing Support & Check-ins</h3>
+          <p>Beyond a single session — regular check-ins to track progress, adjust goals, and stay accountable through a full season, not just a one-off conversation.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Anton',sans-serif; font-size:1.3rem; text-transform:uppercase; color:var(--pitch-deep); margin:36px 0 18px;">Who This Is For</h3>
+    <div class="xv">
+      <div class="xv-item">
+        <div class="xv-jersey mono">✓</div>
+        <div>
+          <h3>High School Rugby Players</h3>
+          <p>Young players working their way up school rugby ranks, looking for direction from someone who's been exactly where they are — starting out fresh out of high school in 2018.</p>
+        </div>
+      </div>
+      <div class="xv-item">
+        <div class="xv-jersey mono">✓</div>
+        <div>
+          <h3>Teachers & School Coaches</h3>
+          <p>Educators and coaches looking for a guest speaker, clinic facilitator, or an outside voice to reinforce discipline and goal-setting with their students and rugby teams.</p>
+        </div>
+      </div>
+      <div class="xv-item">
+        <div class="xv-jersey mono">✓</div>
+        <div>
+          <h3>Campus & University Student-Athletes</h3>
+          <p>Student-athletes trying to balance serious training with a degree, the way I balanced Kabras with a Biochemistry degree at Masinde Muliro University.</p>
+        </div>
+      </div>
+      <div class="xv-item" style="border-bottom:none;">
+        <div class="xv-jersey mono">✓</div>
+        <div><p>Anyone who needs a structured, accountable push toward a goal — on the pitch or off it.</p></div>
+      </div>
+    </div>
+
+    <div class="mv-grid" style="margin-top:36px;">
+      <div class="mv-card">
+        <h4>For Schools</h4>
+        <p>Book a clinic, guest talk, or team session for your students — covering technique, discipline, and preparing for what comes after school rugby.</p>
+      </div>
+      <div class="mv-card">
+        <h4>For Campuses</h4>
+        <p>Available for university rugby teams and student-athlete groups looking for guidance on balancing high-level sport with academics.</p>
+      </div>
+    </div>
+
+    <div class="cta-row" style="margin-top:40px;">
+      <a class="btn btn-primary" href="mailto:cantonaericouko@gmail.com?subject=Mentorship%20Inquiry">Book a Session</a>
+      <a class="btn btn-ghost" style="border-color:var(--pitch); color:var(--pitch-deep);" href="mailto:cantonaericouko@gmail.com?subject=School%20or%20Campus%20Clinic%20Inquiry">Book a School or Campus Visit</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="section-head">
+        <span class="section-num mono">02</span>
+        <h2 class="section-title">About</h2>
+      </div>
+      <p>
+        A 3-time Kenya Cup champion and 3-time Enterprise Cup champion with Kabras RFC,
+        and top point scorer in the Kenya Cup for the 2025/2026 season. Competing at
+        the top level of Kenyan club rugby while balancing the discipline it takes
+        to stay there season after season.
+      </p>
+      <p>
+        Off the pitch, a biochemist working as a process manager at a sugar company —
+        bringing the same structure and consistency from the lab and the plant floor
+        into training, mentorship, and building a platform that shares that journey.
+      </p>
+      <p>
+        That same path — high school rugby, a university degree, and a club career built
+        from the second team up — is why The Foundation speaks directly to students,
+        their teachers and coaches, and campus student-athletes walking the same road.
+      </p>
+    </div>
+    <div class="about-photo reveal">
+      <img src="photo-3.jpg" alt="Cantona Ouko preparing to kick for Kabras RFC" onerror="this.parentElement.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="background:#EFEADD;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">03</span>
+      <h2 class="section-title">Matchday Gallery</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item"><img src="photo-1.jpg" alt="Cantona Ouko kicking for Kabras RFC" onerror="this.style.display='none'"></div>
+      <div class="gallery-item"><img src="photo-2.jpg" alt="Cantona Ouko playing for Kabras RFC" onerror="this.style.display='none'"></div>
+      <div class="gallery-item"><img src="photo-3.jpg" alt="Cantona Ouko preparing to kick" onerror="this.style.display='none'"></div>
+      <div class="gallery-item"><img src="photo-4.jpg" alt="Cantona Ouko Kenya Cup top point scorer award" onerror="this.style.display='none'"></div>
+    </div>
+    <div class="editnote" style="margin-top:20px;">
+      <strong>Want to add more?</strong> upload additional photo-5.jpg, photo-6.jpg, etc.
+      to the same GitHub repo folder as index.html, then copy a gallery-item block above
+      to display them.
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">04</span>
+      <h2 class="section-title">The Journey So Far</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <span class="timeline-year mono">2018</span>
+        <h3>Fresh Out of High School</h3>
+        <p>Started rugby straight out of high school with no shortcuts and no head start — just a decision to begin. Every player you'll ever admire started exactly here.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">2018 – 2022</span>
+        <h3>Built From Scratch at Masinde Muliro University</h3>
+        <p>Joined Masinde Muliro University of Science and Technology to study Biochemistry, and joined the university rugby team from the bottom of the depth chart. Worked up through the ranks year by year — no fast-tracking, just consistent effort — until finally earning a place in the main team in the 3rd and 4th years.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">Post-Graduation</span>
+        <h3>Arriving at Kabras — A New, Harder Grind</h3>
+        <p>Graduated and moved on to Kabras RFC, stepping into a dressing room full of seasoned players, several with national team caps. Instead of being intimidated by the level, treated it as the next chapter to grind through — because every level up demands starting the work over again.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">Season 1</span>
+        <h3>Paying Dues in the Second Team</h3>
+        <p>Spent the first season with Kabras in the second team, earning only cameo appearances in the first team. Stayed patient and kept working — proof that a slow start doesn't define the ceiling.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">Seasons 2 & 3</span>
+        <h3>Earned the Starting Jersey</h3>
+        <p>Sealed a starting position by the second season and held it into the third — turning consistent, unglamorous work into a permanent place in the first team.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year mono">2025/2026</span>
+        <h3>League Top Point Scorer — 133 Points</h3>
+        <p>Started all 13 of 14 games played and finished the season as the league's top point scorer with 133 points. From second-team cameos to the top of the scoring charts — the throughline the whole way was showing up and doing the work when no one was watching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="partner">
+  <div class="wrap">
+    <div class="partner">
+      <div class="partner-bg"></div>
+      <div class="section-num mono" style="color:var(--ochre-bright);">05 — SPONSORSHIP</div>
+      <h2>Partner with an athlete your audience already trusts.</h2>
+      <p>
+        A growing, engaged Instagram following that trusts an athlete who backs up
+        the content with real results — 3x Kenya Cup champion, 3x Enterprise Cup
+        champion, and Kenya Cup top point scorer for 2025/2026. Open to partnerships
+        with sportswear and equipment brands, nutrition and supplement companies,
+        and local businesses looking for an athlete voice their audience can trust.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:cantonaericouko@gmail.com?subject=Sponsorship%20Inquiry">Request Media Kit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact-form">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">06</span>
+      <h2 class="section-title">Get In Touch</h2>
+    </div>
+    <form class="contact-form" action="https://formspree.io/f/mqerlwdn" method="POST">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="role">I am a...</label>
+        <select id="role" name="role">
+          <option value="High school student">High School Student</option>
+          <option value="Teacher / Coach">Teacher / Coach</option>
+          <option value="Campus student-athlete">Campus Student-Athlete</option>
+          <option value="Sponsor / Brand">Sponsor / Brand</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;">
+    <div class="mono">© 2026 CANTONA OUKO — KABRAS RFC</div>
+    <div class="social-links">
+      <a href="https://instagram.com/cantona_ouko" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="https://tiktok.com/@cantona_ouko" target="_blank" rel="noopener">TIKTOK</a>
+      <a href="https://twitter.com/cantona_ouko" target="_blank" rel="noopener">TWITTER</a>
+      <a href="mailto:cantonaericouko@gmail.com">EMAIL</a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#0D2216" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"></line>
+    <polyline points="5 12 12 5 19 12"></polyline>
+  </svg>
+</button>
+
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll progress bar
+  const progressBar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  });
+
+  // Back to top button
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
+    }
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Scroll reveal animations
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
